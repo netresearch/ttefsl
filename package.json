@@ -1,0 +1,28 @@
+{
+  "name": "ttefsl",
+  "version": "1.0.0",
+  "description": "Create entries for Netresearch TimeTracker from system logs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/netresearch/ttefsl.git"
+  },
+  "keywords": [
+    "netresearch",
+    "timetracker"
+  ],
+  "author": "Christian Opitz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/netresearch/ttefsl/issues"
+  },
+  "homepage": "https://github.com/netresearch/ttefsl#readme",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "commander": "^2.9.0",
+    "request": "^2.81.0"
+  }
+}

@@ -1,0 +1,34 @@
+#!/usr/bin/env node
+
+const command = require('commander');
+require('colors');
+
+command
+  .version('1.0.0')
+  .description('Create TimeTracker log entries from your system log')
+  .option('-w, --write', 'Actually write to TimeTracker - if not provided, preview is displayed');
+
+let reader;
+if (process.platform === 'win32') {
+  const WindowsReader = require('./lib/reader/Windows');
+  reader = new WindowsReader(command);
+} else if (process.platform === 'darwin') {
+  throw new Error('MacOS is not supported (yet)');
+} else {
+  throw new Error('Linux is not supported (yet)');
+}
+
+const AbstractLogger = require('./lib/logger/Abstract');
+AbstractLogger.configureCommand(command);
+
+command.parse(process.argv);
+
+const Logger = command.write ? require('./lib/logger/TimeTracker') : require('./lib/logger/Preview');
+const logger = new Logger(command);
+
+logger.configure();
+reader.configure();
+reader.read().then((entries) => {
+  logger.setEntries(entries);
+  logger.flush();
+});
