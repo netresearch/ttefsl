@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const command = require('commander');
+const fs = require('fs');
 require('colors');
 
 command
@@ -8,15 +9,19 @@ command
   .description('Create TimeTracker log entries from your system log')
   .option('-w, --write', 'Actually write to TimeTracker - if not provided, preview is displayed');
 
-let reader;
-if (process.platform === 'win32') {
-  const WindowsReader = require('./lib/reader/Windows');
-  reader = new WindowsReader(command);
+
+let readerClass;
+if (fs.existsSync('ttefsl-entries.txt')) {
+  readerClass = require('./lib/reader/EntryFile');
+} else if (process.platform === 'win32') {
+  readerClass = require('./lib/reader/Windows');
 } else if (process.platform === 'darwin') {
   throw new Error('MacOS is not supported (yet)');
 } else {
   throw new Error('Linux is not supported (yet)');
 }
+
+const reader = new readerClass(command);
 
 const AbstractLogger = require('./lib/logger/Abstract');
 AbstractLogger.configureCommand(command);
