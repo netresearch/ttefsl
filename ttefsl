@@ -18,7 +18,7 @@ if (fs.existsSync('ttefsl-entries.txt')) {
 } else if (process.platform === 'darwin') {
   throw new Error('MacOS is not supported (yet)');
 } else {
-  throw new Error('Linux is not supported (yet)');
+  readerClass = require('./lib/reader/Linux');
 }
 
 const reader = new readerClass(command);
