@@ -12,7 +12,8 @@ require('colors');
 command
   .version('1.0.0')
   .description('Create TimeTracker log entries from your system log')
-  .option('-w, --write', 'Actually write to TimeTracker - if not provided, preview is displayed');
+  .option('-w, --write', 'Actually write to TimeTracker - if not provided, preview is displayed')
+  .option('-i, --info', 'Read the stats for a month from timetracker');
 
 
 let readerClass;
@@ -33,12 +34,18 @@ AbstractLogger.configureCommand(command);
 
 command.parse(process.argv);
 
-const Logger = command.write ? require('./lib/logger/TimeTracker') : require('./lib/logger/Preview');
-const logger = new Logger(command);
+if (command.info) {
+  const TimeTracker = require('./lib/TimeTracker')
+  const tt = new TimeTracker()
+  tt.info()
+} else {
+  const Logger = command.write ? require('./lib/logger/TimeTracker') : require('./lib/logger/Preview');
+  const logger = new Logger(command);
 
-logger.configure();
-reader.configure();
-reader.read().then((entries) => {
-  logger.setEntries(entries);
-  logger.flush();
-});
+  logger.configure();
+  reader.configure();
+  reader.read().then((entries) => {
+    logger.setEntries(entries);
+    logger.flush();
+  });
+}

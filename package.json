@@ -23,6 +23,7 @@
   "dependencies": {
     "colors": "^1.1.2",
     "commander": "^2.9.0",
+    "holiday-de": "^1.1.3",
     "request": "^2.81.0"
   }
 }
