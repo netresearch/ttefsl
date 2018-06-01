@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
+process.on('unhandledRejection', error => {
+  // Will print "unhandledRejection err is not defined"
+  console.error(error.message, error.stack);
+});
+
 const command = require('commander');
 const fs = require('fs');
 require('colors');
