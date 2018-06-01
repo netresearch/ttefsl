@@ -2,8 +2,6 @@
 
 Command line utility to create TimeTracker log entries from your system logs. This is useful if your computers uptime correlates with your working hours.
 
-<kbd>![](res/logging.gif?raw=true)</kbd>
-
 This is what it does for you:
 
 - Find start/end times by adequate event ids from Windows Event Log Reader (Linux and MacOS may be added in future)
@@ -15,7 +13,15 @@ This is what it does for you:
     - User is asked for TimeTracker URL, username and password
     - User is asked for customer, project and activity
     - All input will be saved in a rc file as defaults for next execution (where user can then change those defaults if needed)
-    
+- Get a report of hours worked per day in a month
+
+## Logging demo
+
+<kbd>![](res/logging.gif?raw=true)</kbd>
+
+## Report demo
+  
+<kbd>![](res/report.gif?raw=true)</kbd>
 
 ## Installation
 
@@ -36,6 +42,7 @@ npm install
 
     -h, --help            output usage information
     -V, --version         output the version number
+    -i, --info            Read the stats for a month from timetracker
     -w, --write           Actually write to TimeTracker - if not provided, preview is displayed
     -m, --month <n>       Month of the year to use (starting at 1)
     --start-ids <ids>     Event IDs for system start
