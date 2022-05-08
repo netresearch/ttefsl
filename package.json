@@ -22,7 +22,7 @@
   "homepage": "https://github.com/netresearch/ttefsl#readme",
   "dependencies": {
     "colors": "^1.1.2",
-    "commander": "^9.1.0",
+    "commander": "^9.2.0",
     "holiday-de": "^1.1.3",
     "request": "^2.81.0"
   }
