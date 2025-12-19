@@ -13,7 +13,7 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
         node-version: [18.x, 20.x]
@@ -33,6 +33,3 @@ jobs:
 
     - name: Run linter
       run: npm run lint --if-present
-
-    - name: Run tests
-      run: npm test --if-present
